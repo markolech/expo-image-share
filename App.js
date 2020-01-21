@@ -8,8 +8,10 @@ import {
   View,
 } from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
-import * as Sharing from 'expo-sharing'
+
 import uploadToAnonymousFilesAsync from 'anonymous-files'
+
+import ShareImage from './components/ShareImage'
 
 import logo from './assets/logo.png'
 
@@ -36,33 +38,11 @@ export default function App() {
     } else {
       setSelectedImage({ localUri: pickerResult.uri, remoteUri: null })
     }
-
-    // setSelectedImage({ localUri: pickerResults.uri })
   }
 
-  let openSharedialogAsync = async () => {
-    if (!(await Sharing.isAvailableAsync())) {
-      alert(`The image is available for sharing at: ${selectedImage.remoteUri}`)
-      return
-    }
-    Sharing.shareAsync(selectedImage.localUri || selectedImage.localUri)
-  }
-
-  if (selectedImage !== null) {
-    return (
-      <View style={styles.container}>
-        <Image
-          source={{ uri: selectedImage.localUri }}
-          style={styles.thumbnail}
-        />
-        <TouchableOpacity onPress={openSharedialogAsync} style={styles.button}>
-          <Text style={styles.buttonText}>Share this photo mate!</Text>
-        </TouchableOpacity>
-      </View>
-    )
-  }
-
-  return (
+  return selectedImage !== null ? (
+    <ShareImage selectedImage={selectedImage} />
+  ) : (
     <View style={styles.container}>
       <Image
         source={{ uri: 'https://i.imgur.com/TkIrScD.png' }}
