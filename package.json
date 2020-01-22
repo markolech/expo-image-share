@@ -8,6 +8,8 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@aws-amplify/api": "^2.1.3",
+    "@aws-amplify/pubsub": "^2.1.3",
     "anonymous-files": "^1.0.1",
     "expo": "~36.0.0",
     "expo-image-picker": "~8.0.1",
