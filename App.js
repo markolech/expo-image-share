@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 
+import Amplify from 'aws-amplify'
+import amplify from './aws-exports'
+
 import ShareImage from './components/ShareImage'
 import SelectImage from './components/SelectImage'
 
@@ -7,6 +10,8 @@ import SelectImage from './components/SelectImage'
 
 export default function App() {
   let [selectedImage, setSelectedImage] = useState(null)
+
+  Amplify.configure(amplify)
 
   return selectedImage !== null ? (
     <ShareImage selectedImage={selectedImage} />
